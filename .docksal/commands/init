@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+## Initialize project
+##
+## Usage: fin init
+
+# Stop on error
+set -e
+
+# Initialize local docksal settings
+if [[ ! -f .docksal/docksal-local.env ]]; then
+  echo "Creating .docksal/docksal-local.env..."
+  cp .docksal/docksal.env .docksal/docksal-local.env
+fi
+
+# Spin up containers
+fin up
+
+# Run composer install
+fin composer install --ignore-platform-reqs
+
+# Re-create wp-config.php if it doesn't exist (Docksal usually handles this but we'll be sure)
+if [[ ! -f wp-config.php ]]; then
+  echo "Warning: wp-config.php is missing. Please ensure it is created or mounted correctly."
+fi
+
+echo "Success! Your project is initialized."

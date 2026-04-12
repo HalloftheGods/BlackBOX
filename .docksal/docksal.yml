@@ -1,0 +1,28 @@
+# Docksal wrapper for standard docker-compose setup
+services:
+  db:
+    extends:
+      file: ../docker-compose.yml
+      service: db
+
+  composer:
+    extends:
+      file: ../docker-compose.yml
+      service: composer
+
+  cli:
+    build:
+      context: ..
+      dockerfile: docker/cli/Dockerfile
+    volumes:
+      - ..:/var/www/html
+    environment:
+      - DOCROOT=.
+
+  web:
+    extends:
+      file: ../docker-compose.yml
+      service: wordpress
+    labels:
+      - io.docksal.virtual-host=${VIRTUAL_HOST},${VIRTUAL_HOST_ALIASES}
+      - io.docksal.virtual-port=80
