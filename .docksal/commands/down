@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+## Stop project
+##
+## Usage: fin down
+
+fin stop
