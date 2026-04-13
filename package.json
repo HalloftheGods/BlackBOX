@@ -1,6 +1,6 @@
 {
   "name": "blackbox",
-  "version": "1.0.0",
+  "version": "26.4.13",
   "description": "BlackBOX Engine Development Environment",
   "scripts": {
     "composer:clear": "docker compose run --rm composer clear-cache",
